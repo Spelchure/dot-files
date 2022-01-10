@@ -3,7 +3,8 @@ syntax on
 filetype plugin indent on
 set t_Co=256
 set nu
-
+set encoding=UTF-8
+set guifont='Meslo\ LG\ M\ DZ\ Regular\ Nerd\ Font\ Complete\ 12'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -35,3 +36,6 @@ let g:airline_symbols.linenr = ''
 
 " vim-fugitive git branch
 let g:airline#extensions#branch#enabled=1
+
+"NERDTree
+nmap <C-n> :NERDTreeToggle<CR>

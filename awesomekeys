@@ -1,0 +1,18 @@
+
+Client
+-------
+Modkey-f: toggle fullscreen 
+Modkey-n: minimize
+Ctrl-Modkey-n: restore
+Modkey-Shift-[0,2,3...]: Move client to tag X
+
+ALSA Sound
+----------
+Alt-m : Toogle mute
+Alt-[up-down]: Volume-up down
+Ctrl-Alt-m: Volume 100%
+Ctrl-Alt-0 : Volume 0%
+
+
+Run command: Modkey-r
+Run lua: Modkey-x

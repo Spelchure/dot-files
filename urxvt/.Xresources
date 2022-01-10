@@ -1,7 +1,9 @@
 URxvt.background:	#1F1D19
 URxvt.foreground:	#DEDEDE
 !URxvt.font:			xft:DejaVu Sans Mono:pixelsize=15:antialias=true:hinting=true
-URxvt.font: xft:Meslo LG M DZ for Powerline:pixelsize=18
+!URxvt.font: xft:MesloLGMDZ Nerd Font Mono
+!URxvt.font: xft:Meslo LG M DZ for Powerline:pixelsize=18
+URxvt.font: xft:agave Nerd Font Mono:pixelsize=22
 !URxvt.font: xft:Droid Sans Mono for Powerline:size=10
 !URxvt.letterSpace: -2
 !URxvt.boldFont:		xft:DejaVu Sans Mono:bold:pixelsize=15:antialias=true:hinting=true
@@ -11,6 +13,19 @@ URxvt.perl-ext-common: keyboard-select,url-select,clipboard,digital-clock
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
+
+! For working with tmux [urxvt -> xterm]
+
+! Disable ISO14755 mode (Ctrl-Shift)
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Fix resize pane commands
+URxvt.keysym.C-S-Up: string:\033[1;6A
+URxvt.keysym.C-S-Down: string:\033[1;6B
+URxvt.keysym.C-S-Left: string:\033[1;6D
+URxvt.keysym.C-S-Right: string:\033[1;6C
+
 !URxvt.keysym.M-c:   perl:clipboard:copy
 !URxvt.keysym.M-v:   perl:clipboard:paste
 !URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
