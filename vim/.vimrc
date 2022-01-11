@@ -39,3 +39,8 @@ let g:airline#extensions#branch#enabled=1
 
 "NERDTree
 nmap <C-n> :NERDTreeToggle<CR>
+
+"GRUVBox theme
+let g:gruvbox_italic=1
+set bg=dark
+autocmd vimenter * ++nested colorscheme gruvbox
