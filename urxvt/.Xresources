@@ -48,5 +48,11 @@ URxvt.keysym.KP_7:      7
 URxvt.keysym.KP_8:      8
 URxvt.keysym.KP_9:      9
 URxvt.keysym.KP_0:      0
-URxvt.transparent: true
-URxvt.shading: 25
+
+!Real Transparency ( if your systems supports )
+URxvt.depth: 32
+URxvt.background: rgba:0000/0000/0800/c200
+
+!Fake Transparency ( fake transparency if your system does not support real t.)
+!URxvt.transparent: true
+!URxvt.shading: 25
