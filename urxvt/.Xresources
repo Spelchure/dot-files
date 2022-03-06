@@ -1,15 +1,38 @@
 URxvt.background:	#1F1D19
-URxvt.foreground:	#DEDEDE
+URxvt.foreground:	#ebdbb2
+
+*.color1: #cc241d
+*.color2: #98971a
+*.color3: #d79921
+*.color4: #458588
+*.color5: #b16286
+*.color6: #689d6a 
+*.color7: #ffffff
+*.color8: #928374 
+*.color9: #fb4934
+*.color10: #b8bb26
+*.color11: #fabd2f
+*.color12: #83a598
+*.color13: #d3869b
+*.color14: #8ec07c
+*.color15: #ebdbb2 
+*.color16: #ffffff
+
+URxvt.cursorColor: #fb4934
+
 !URxvt.font:			xft:DejaVu Sans Mono:pixelsize=15:antialias=true:hinting=true
 !URxvt.font: xft:MesloLGMDZ Nerd Font Mono
 !URxvt.font: xft:Meslo LG M DZ for Powerline:pixelsize=18
-URxvt.font: xft:agave Nerd Font Mono:pixelsize=22
+URxvt.font: xft:agave Nerd Font Mono:pixelsize=19
 !URxvt.font: xft:Droid Sans Mono for Powerline:size=10
 !URxvt.letterSpace: -2
 !URxvt.boldFont:		xft:DejaVu Sans Mono:bold:pixelsize=15:antialias=true:hinting=true
 URxvt.scrollBar:	false
 URxvt.saveLines:	65535
-URxvt.perl-ext-common: keyboard-select,url-select,clipboard,digital-clock
+
+URxvt.perl-ext-common: keyboard-select,url-select,clipboard
+!digital-clock
+
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
@@ -50,9 +73,9 @@ URxvt.keysym.KP_9:      9
 URxvt.keysym.KP_0:      0
 
 !Real Transparency ( if your systems supports )
-URxvt.depth: 32
-URxvt.background: rgba:0000/0000/0800/c200
+!URxvt.depth: 32
+!URxvt.background: rgba:0000/0000/0800/c200
 
 !Fake Transparency ( fake transparency if your system does not support real t.)
-!URxvt.transparent: true
-!URxvt.shading: 25
+URxvt.transparent: true
+URxvt.shading: 10
