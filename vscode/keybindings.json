@@ -1,0 +1,18 @@
+[
+  {
+    "key": "-",
+    "command": "extension.vim_ctrl+b",
+    "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "-extension.vim_ctrl+b",
+    "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "tab",
+    "command": "search.action.focusSearchList",
+    "when": "searchViewletVisible"
+  }
+]
+

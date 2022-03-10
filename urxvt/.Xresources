@@ -1,32 +1,53 @@
 URxvt.background:	#1F1D19
 URxvt.foreground:	#ebdbb2
 
+!!red
 *.color1: #cc241d
+!!green
 *.color2: #98971a
+!!yellow
 *.color3: #d79921
+!!blue
 *.color4: #458588
+!!purple
 *.color5: #b16286
+!!light light green
 *.color6: #689d6a 
-*.color7: #ffffff
+!!light gray
+*.color7: #a89984
+!!gray
 *.color8: #928374 
+!!light red
 *.color9: #fb4934
+!!light green
 *.color10: #b8bb26
+!!yellow
 *.color11: #fabd2f
+!!light blue
 *.color12: #83a598
+!!pink
 *.color13: #d3869b
+!!blue+green
 *.color14: #8ec07c
+!!smoke white
 *.color15: #ebdbb2 
+!!white
 *.color16: #ffffff
 
-URxvt.cursorColor: #fb4934
+!! yellow
+URxvt.cursorColor: #ffff00
+URxvt.cursorBlink: 1
+URxvt.cursorUnderline: 1
 
 !URxvt.font:			xft:DejaVu Sans Mono:pixelsize=15:antialias=true:hinting=true
 !URxvt.font: xft:MesloLGMDZ Nerd Font Mono
 !URxvt.font: xft:Meslo LG M DZ for Powerline:pixelsize=18
-URxvt.font: xft:agave Nerd Font Mono:pixelsize=19
+!URxvt.font: xft:agave Nerd Font Mono:pixelsize=19
+URxvt.font: xft:MesloLGS NF:size=12
 !URxvt.font: xft:Droid Sans Mono for Powerline:size=10
 !URxvt.letterSpace: -2
-!URxvt.boldFont:		xft:DejaVu Sans Mono:bold:pixelsize=15:antialias=true:hinting=true
+URxvt.boldFont:		xft:MesloLGS NF:bold:size=12:antialias=true:hinting=true
+URxvt.italicFont: xft:MesloLGS NF:italic:size=12
 URxvt.scrollBar:	false
 URxvt.saveLines:	65535
 
@@ -77,5 +98,5 @@ URxvt.keysym.KP_0:      0
 !URxvt.background: rgba:0000/0000/0800/c200
 
 !Fake Transparency ( fake transparency if your system does not support real t.)
-URxvt.transparent: true
+URxvt.transparent:true
 URxvt.shading: 10
