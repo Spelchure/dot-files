@@ -2,7 +2,6 @@
   "workbench.colorTheme": "Gruvbox Dark Soft",
   "editor.fontFamily": "'agave Nerd Font', monospace",
   "workbench.iconTheme": "material-icon-theme",
-  "editor.fontSize": 17,
   "editor.tabSize": 4,
   "thunder-client.codeSnippetLanguage": "curl",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -14,6 +13,7 @@
   "vim.cursorStylePerMode.normal": "block-outline",
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingQuotes": "never",
-  "vim.foldfix": true
+  "vim.foldfix": true,
+  "editor.fontSize": 15,
+  "editor.minimap.enabled": false
 }
-

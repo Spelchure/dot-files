@@ -1,3 +1,4 @@
+// Place your key bindings in this file to override the defaultsauto[]
 [
   {
     "key": "-",
@@ -13,6 +14,80 @@
     "key": "tab",
     "command": "search.action.focusSearchList",
     "when": "searchViewletVisible"
+  },
+  {
+    "key": "ctrl+alt+h",
+    "command": "workbench.action.splitEditorRight",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+v",
+    "command": "workbench.action.splitEditorDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+q",
+    "command": "workbench.action.closeEditorsInGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+k w",
+    "command": "-workbench.action.closeEditorsInGroup"
+  },
+  {
+    "key": "-",
+    "command": "extension.vim_ctrl+up",
+    "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+up",
+    "command": "-extension.vim_ctrl+up",
+    "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+left",
+    "command": "workbench.action.focusLeftGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+k ctrl+left",
+    "command": "-workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "ctrl+right",
+    "command": "workbench.action.focusRightGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+k ctrl+right",
+    "command": "-workbench.action.focusRightGroup"
+  },
+  {
+    "key": "ctrl+up",
+    "command": "workbench.action.focusAboveGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+k ctrl+up",
+    "command": "-workbench.action.focusAboveGroup"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "workbench.action.focusBelowGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+k ctrl+down",
+    "command": "-workbench.action.focusBelowGroup"
+  },
+  {
+    "key": "-",
+    "command": "extension.vim_ctrl+down",
+    "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "-extension.vim_ctrl+down",
+    "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
   }
 ]
-
