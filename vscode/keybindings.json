@@ -89,5 +89,13 @@
     "key": "ctrl+down",
     "command": "-extension.vim_ctrl+down",
     "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+alt+z",
+    "command": "workbench.action.toggleZenMode"
+  },
+  {
+    "key": "ctrl+k z",
+    "command": "-workbench.action.toggleZenMode"
   }
 ]

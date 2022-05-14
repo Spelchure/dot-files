@@ -15,5 +15,14 @@
   "editor.autoClosingQuotes": "never",
   "vim.foldfix": true,
   "editor.fontSize": 15,
-  "editor.minimap.enabled": false
+  "editor.minimap.enabled": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.rulers": [80, 120],
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#aaaaaa25"
+  },
+  "zenMode.centerLayout": false,
+  "zenMode.hideLineNumbers": false,
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 80
 }
