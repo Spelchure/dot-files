@@ -24,5 +24,8 @@
   "zenMode.centerLayout": false,
   "zenMode.hideLineNumbers": false,
   "editor.wordWrap": "off",
-  "editor.wordWrapColumn": 80
+  "editor.wordWrapColumn": 80,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "zenMode.hideStatusBar": false
 }
