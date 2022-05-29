@@ -7,6 +7,52 @@ Configurations used in unix-like systems.
 - Used font: [Agave Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Agave)
 - Configuration: [.vimrc](./vim/.vimrc)
 
+## VSCODE EXTENSIONS
+
+- Add jsdoc comments
+- C/C++
+- CMake
+- CMake Tools
+- Docker
+- Doxygen Documentation
+- EJS Language Support
+- ES7+ React/Redux/React-Native Snippets
+- ESLint
+- Gruvbox Theme
+- Jupyter
+- LaTeX Workshop
+- Markdown TOC
+- Material Icon Theme
+- Prettier
+- Pylance
+- Python
+- Sass
+- Tailwind CSS
+- Thunder Client
+- Vim
+
+## ZSH PLUGINS/ EXTENSIONS / TOOlS
+
+
+- **oh-my-zsh**
+- **powerlevel10k**
+- thefuck
+- git
+- bundler
+- dotenv
+- fzf
+- colorize
+- colored-man-pages
+- zsh-syntax-highlighting
+- zsh-autosuggestions
+- command-not-found
+- docker
+- docker-compose
+- history
+- jsontools
+- fzf
+- thefuck
+
 ### Used plugins: 
 
 Plugin manager: [Pathogen](https://github.com/tpope/vim-pathogen)
