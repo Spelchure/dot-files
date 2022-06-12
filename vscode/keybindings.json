@@ -101,5 +101,9 @@
   {
     "key": "ctrl+t",
     "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+f11",
+    "command": "workbench.action.navigateBack"
   }
 ]

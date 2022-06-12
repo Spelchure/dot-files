@@ -30,6 +30,7 @@ Configurations used in unix-like systems.
 - Tailwind CSS
 - Thunder Client
 - Vim
+- Editorconfig
 
 ## ZSH PLUGINS/ EXTENSIONS / TOOlS
 
