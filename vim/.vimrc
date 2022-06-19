@@ -72,4 +72,5 @@ set completeopt-=preview
 "
 
 " CLANG-FORMAT Auto Format on Save
+" May break in older vim versions
 let g:clang_format#auto_format=1
