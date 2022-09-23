@@ -11,11 +11,6 @@
     "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
   },
   {
-    "key": "tab",
-    "command": "search.action.focusSearchList",
-    "when": "searchViewletVisible"
-  },
-  {
     "key": "ctrl+alt+h",
     "command": "workbench.action.splitEditorRight",
     "when": "editorTextFocus"
@@ -103,7 +98,46 @@
     "command": "workbench.action.terminal.toggleTerminal"
   },
   {
-    "key": "ctrl+f11",
+    "key": "ctrl+f12",
     "command": "workbench.action.navigateBack"
+  },
+  {
+    "key": "n",
+    "when": "explorerViewletFocus && !inputFocus",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "m",
+    "when": "explorerViewletFocus && !inputFocus",
+    "command": "explorer.newFolder"
+  },
+  {
+    "key": "ctrl+b c",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+b e",
+    "when": "",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+b s",
+    "when": "!searchViewletVisible",
+    "command": "workbench.view.search"
+  },
+  {
+    "key": "ctrl+b s",
+    "when": "searchViewletVisible",
+    "command": "search.action.focusSearchList"
+  },
+  {
+    "key": "ctrl-b i",
+    "when": "!editorFocus",
+    "command": "workbench.action.focusActiveEditorGroup"
+  },
+  {
+    "key": "tab",
+    "when": "sideBarFocus && searchViewletVisible",
+    "command": "search.action.focusSearchList"
   }
 ]

@@ -4,10 +4,13 @@ syntax on
 "Language specific syntax
 filetype plugin indent on
 
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set t_Co=256
 set nu
 set encoding=UTF-8
-set guifont='Meslo\ LG\ M\ DZ\ Regular\ Nerd\ Font\ Complete\ 12'
+"set guifont='Meslo\ LG\ M\ DZ\ Regular\ Nerd\ Font\ Complete\ 12'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -73,3 +76,6 @@ set completeopt-=preview
 
 " CLANG-FORMAT Auto Format on Save
 let g:clang_format#auto_format=1
+
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline_focuslost_inactive = 0 
