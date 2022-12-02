@@ -9,6 +9,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/usr/local/crosstool-ng/bin:/home/spelchure/.deno/bin:/usr/local/go/bin:/home/spelchure/miniconda3/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -126,9 +127,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # some aliases
+
 alias ls='lsd --group-dirs first'
 alias tree='lsd --tree'
-
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern ) #cursor line root
 
@@ -150,3 +151,24 @@ ZSH_HIGHLIGHT_STYLES[precommand]='fg=011' #yellow
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/spelchure/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/spelchure/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/spelchure/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/spelchure/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+source /opt/ros/foxy/setup.zsh
+source /usr/share/colcon_cd/function/colcon_cd.sh 
+export _colcon_cd_root=/opt/ros/foxy/ 
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+bindkey "^[Od" backward-word
+bindkey "^[Oc" forward-word
