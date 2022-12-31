@@ -1,0 +1,63 @@
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+set t_Co=256
+set nu
+set encoding=UTF-8
+set guifont='Meslo\ LG\ M\ DZ\ Regular\ Nerd\ Font\ Complete\ 12'
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+	    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+" vim-fugitive git branch
+let g:airline#extensions#branch#enabled=1
+
+" KEYBINDINGS
+" ===========
+
+" nnoremap <C-w>h Go left tab
+" nnoremap <C-w>l Go right tab
+" nnoremap <C-w>j Go up tab
+" nnoremap <C-w>k Go down tab
+" nnoremap <C-w>s split vertial
+" nnoremap <C-w>v split horizontal 
+" nnoremap <C-w>H move the current window far left
+" nnoremap <C-w>L move the current window far	right 
+" nnoremap <C-w>J move the current window very top 
+" nnoremap <C-w>K move the current window very bottom 
+
+
+"NERDTree
+nnoremap <C-b>e :NERDTreeToggle<CR>
+
+"GRUVBox theme
+let g:gruvbox_italic=1
+set bg=dark
+"autocmd vimenter * ++nested colorscheme gruvbox
+autocmd vimenter * colorscheme gruvbox
+set ts=2
