@@ -1,6 +1,7 @@
 
-# CONFIGURATIONS
-Configurations used in unix-like systems.
+# DOT FILES 
+
+My current setup.
 
 ## VIM
 - Used theme: [Gruvbox](https://github.com/morhetz/gruvbox)
