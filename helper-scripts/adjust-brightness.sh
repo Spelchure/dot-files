@@ -1,4 +1,6 @@
 #!/bin/bash
+# WARNING this is software level brighntess
+# If your hardware supports use xbacklight.
 
 MON="eDP-1"    # Discover monitor name with: xrandr | grep " connected"
 STEP=5          # Step Up/Down brightnes by: 5 = ".05", 10 = ".10", etc.
