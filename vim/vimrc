@@ -11,6 +11,14 @@ if !exists('g:airline_symbols')
 	    let g:airline_symbols = {}
 endif
 
+" 80 chars marker.
+if exists('+colorcolumn')
+	set colorcolumn=80
+else
+	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+
 " unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
