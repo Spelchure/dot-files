@@ -52,7 +52,7 @@ let g:rainbow_active = 1
 " ===========
 
 " Vim should be compiled with +clipboard support: vim --version
-noremap y "*y
+"noremap y "*y
 
 
 " Toggle highlight searched word search word
