@@ -1,8 +1,9 @@
 [user]
-	email = alperenbayramoglu2@gmail.com
-	name = Spelchure
+	email = <your_email>
+	name = <your_username> 
 [core]
 	editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
     ui = auto
 [diff]
@@ -12,3 +13,4 @@
 [alias]
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	st = status
+  df = diff
