@@ -25,6 +25,8 @@ Plugin manager: [Pathogen](https://github.com/tpope/vim-pathogen)
 11. [vim-parinfer](https://github.com/bhurlow/vim-parinfer) **Clojure paranthesis**
 12. [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) **Open files with fuzzy search**
 13. [rainbow](https://github.com/luochen1990/rainbow) **Rainbow paranthesis**
+14. [psf-black](https://github.com/psf/black) **Python formatter**
+
 
 ## VSCODE EXTENSIONS
 
