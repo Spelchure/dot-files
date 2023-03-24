@@ -1,14 +1,14 @@
-
-# DOT FILES 
+# DOT FILES
 
 My current setup.
 
 ## VIM
+
 - Used theme: [Gruvbox](https://github.com/morhetz/gruvbox)
 - Used font: [Agave Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Agave)
 - Configuration: [.vimrc](./vim/.vimrc)
 
-### Used plugins: 
+### Used plugins:
 
 Plugin manager: [Pathogen](https://github.com/tpope/vim-pathogen)
 
@@ -27,6 +27,7 @@ Plugin manager: [Pathogen](https://github.com/tpope/vim-pathogen)
 13. [rainbow](https://github.com/luochen1990/rainbow) **Rainbow paranthesis**
 14. [psf-black](https://github.com/psf/black) **Python formatter**
 
+[VIFM Colors](https://github.com/vifm/vifm-colors)
 
 ## VSCODE EXTENSIONS
 
@@ -55,7 +56,6 @@ Plugin manager: [Pathogen](https://github.com/tpope/vim-pathogen)
 
 ## ZSH PLUGINS/ EXTENSIONS / TOOlS
 
-
 - **oh-my-zsh**
 - **powerlevel10k**
 - thefuck
@@ -76,10 +76,10 @@ Plugin manager: [Pathogen](https://github.com/tpope/vim-pathogen)
 - thefuck
 
 ## URXVT
+
 - Configuration: [.Xresources](./urxvt/.Xresources)
 
 ## TMUX
+
 - Configuration: [.tmux.conf](./tmux/.tmux.conf)
 - TMUX Powerline: [tmux-powerline](https://github.com/erikw/tmux-powerline)
-
-
