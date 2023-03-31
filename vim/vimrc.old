@@ -1,24 +1,29 @@
 execute pathogen#infect()
 syntax on
-
-"Language specific syntax
 filetype plugin indent on
-
-set tabstop=4
-set shiftwidth=4
-set expandtab
 set t_Co=256
 set nu
+set ts=2
 set encoding=UTF-8
-"set guifont='Meslo\ LG\ M\ DZ\ Regular\ Nerd\ Font\ Complete\ 12'
+set guifont='Meslo\ LG\ M\ DZ\ Regular\ Nerd\ Font\ Complete\ 12'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
 	    let g:airline_symbols = {}
 endif
 
-"backspace support
-set backspace=indent,eol,start
+" 80 chars marker.
+if exists('+colorcolumn')
+	set colorcolumn=80
+else
+	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+" Automatically copy to clipboard
+" If clipboard feature exists.
+if has("clipboard") 
+	noremap y "+y
+endif
 
 " unicode symbols
 let g:airline_left_sep = '»'
@@ -46,36 +51,53 @@ let g:airline_symbols.linenr = ''
 " vim-fugitive git branch
 let g:airline#extensions#branch#enabled=1
 
-"NERDTree
-nmap <C-n> :NERDTreeToggle<CR>
-let NERDTreeQuitOnOpen=0
+" Rainbow paranthesis
+let g:rainbow_active = 1
 
+" KEYBINDINGS
+" ===========
+
+" Vim should be compiled with +clipboard support: vim --version
+"noremap y "*y
+
+
+" Toggle highlight searched word search word
+" under cursor with *
+nnoremap <C-h> :set hls!<CR>
+
+" nnoremap <C-w>h Go left tab
+" nnoremap <C-w>l Go right tab
+" nnoremap <C-w>j Go up tab
+" nnoremap <C-w>k Go down tab
+" nnoremap <C-w>s split vertial
+" nnoremap <C-w>v split horizontal 
+" nnoremap <C-w>H move the current window far left
+" nnoremap <C-w>L move the current window far	right 
+" nnoremap <C-w>J move the current window very top 
+" nnoremap <C-w>K move the current window very bottom 
+
+
+"NERDTree
+nnoremap <C-b>e :NERDTreeToggle<CR>
+
+" Ale linter
+let g:ale_fixers = {}
+let g:ale_fixers.python = ['black']
+let g:ale_linters = {'clojure':['clj-kondo'], 'python': ['pylint']}
+
+
+" Black python formatting
+let g:black_linelength = 79
+
+" Format on save
+augroup black_on_save
+	autocmd!
+	autocmd BufWritePre *.py Black
+augroup end
+"nnoremap <F9> :Black<CR>
 
 "GRUVBox theme
 let g:gruvbox_italic=1
 set bg=dark
-autocmd vimenter * ++nested colorscheme gruvbox
-
-"For YouCompleteMe Python3
-let g:pymode_python = 'python3'
-"Disable preview window
-set completeopt-=preview
-
-" If italics don't work properly
-"let &t_ZH="\e[3m"
-"let &t_ZR="\e[23m"
-"
-" Auto indent on save for certain files
-"set autoindent
-"autocmd BufWritePre *.cpp :normal gg=G
-"autocmd BufWritePre *.cc :normal gg=G
-"autocmd BufWritePre *.c :normal gg=G
-"autocmd BufWritePre *.hpp :normal gg=G
-"autocmd BufWritePre *.h :normal gg=G
-"
-
-" CLANG-FORMAT Auto Format on Save
-let g:clang_format#auto_format=1
-
-let g:airline#extensions#tabline#enabled = 1
-"let g:airline_focuslost_inactive = 0 
+"autocmd vimenter * ++nested colorscheme gruvbox
+autocmd vimenter * colorscheme gruvbox

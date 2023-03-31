@@ -1,28 +1,102 @@
+" This configuration are shared between nvim and vim
+"
+"
+"
+if has('vim_starting')
+  set nocompatible               
+endif
+
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
 set t_Co=256
+if has("termguicolors")
+set termguicolors
+endif
 set nu
+
+set bg=dark
+" CURSOR:
+set guicursor=a:hor30-Cursor/lCursor
 set ts=2
+set softtabstop=2
+" number of space chars
+set shiftwidth=2
+" convert tab to spaces
+set expandtab
+
+" enable term gui colors
+"set termguicolors
+" first split right
+set splitright
+" then split below
+set splitbelow
+
+" encodings
 set encoding=UTF-8
+set fileencoding=UTF-8
+set fileencodings=UTF-8
+
+"  fonts
 set guifont='Meslo\ LG\ M\ DZ\ Regular\ Nerd\ Font\ Complete\ 12'
+set backspace=indent,eol,start
+
+" colorcolumn at 80.
+set cc=80
+
+" show hidden buffers
+set hidden
+
+
+" searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" swap files
+set nobackup
+set noswapfile
+
+" our shell is zsh
+set fileformats=unix,dos,mac
+set showcmd
+set shell=/bin/zsh
+
+" VimPlug
+
+" Check if vim plug exists
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+if !filereadable(vimplug_exists)
+	echo "Installing vim plug..."
+	echo ""
+  silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  let g:not_finish_vimplug = "yes"
+  autocmd VimEnter * PlugInstall
+endif
+
+
+if has("nvim")
+	call plug#begin()
+	Plug 'Mofiqul/dracula.nvim'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " typescript support
+  Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
+  " treesitter extended highlighting
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"  Plug 'lewis6991/gitsigns.nvim'
+"  Bufferline
+  Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+  Plug 'neovim/nvim-lspconfig'
+	call plug#end()
+endif
+
+
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
 	    let g:airline_symbols = {}
-endif
-
-" 80 chars marker.
-if exists('+colorcolumn')
-	set colorcolumn=80
-else
-	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-
-" Automatically copy to clipboard
-" If clipboard feature exists.
-if has("clipboard") 
-	noremap y "+y
 endif
 
 " unicode symbols
@@ -51,19 +125,13 @@ let g:airline_symbols.linenr = ''
 " vim-fugitive git branch
 let g:airline#extensions#branch#enabled=1
 
-" Rainbow paranthesis
-let g:rainbow_active = 1
+" directly copy to clipboard if feature exists
+if has("clipboard")
+	noremap y "+y
+endif
 
 " KEYBINDINGS
 " ===========
-
-" Vim should be compiled with +clipboard support: vim --version
-"noremap y "*y
-
-
-" Toggle highlight searched word search word
-" under cursor with *
-nnoremap <C-h> :set hls!<CR>
 
 " nnoremap <C-w>h Go left tab
 " nnoremap <C-w>l Go right tab
@@ -76,28 +144,106 @@ nnoremap <C-h> :set hls!<CR>
 " nnoremap <C-w>J move the current window very top 
 " nnoremap <C-w>K move the current window very bottom 
 
+" Ignores
 
-"NERDTree
-nnoremap <C-b>e :NERDTreeToggle<CR>
+" NERDTree:
+let NERDTreeShowHidden=1
+let g:NERDTreeIgnore=['node_modules', '__pycache__']
+let g:NERDTreeMinimalUI = 1
+nnoremap <C-b> :NERDTreeToggle<CR>
 
-" Ale linter
+" INTEGRATED TERMINAL: (NEOVIM)
+if has("nvim")
+  tnoremap <Esc> <C-\><C-n>
+  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  function! OpenTerminal()
+    split term://zsh
+    resize 15
+  endfunction
+  nnoremap <c-n> :call OpenTerminal()<CR>
+endif
+
+
+" ALE LINTER:
+let g:ale_linters = {'clojure':['clj-kondo']}
 let g:ale_fixers = {}
 let g:ale_fixers.python = ['black']
 let g:ale_linters = {'clojure':['clj-kondo'], 'python': ['pylint']}
+let g:ale_python_executable='python3'
+
+" FZF:
+nnoremap <C-p> :FZF<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split', 
+  \ 'ctrl-s': 'split', 
+  \ 'ctrl-v': 'vsplit'
+  \}
+
+" CTRLP:
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,node_modules
+let g:ctrlp_show_hidden=1
+let g:ctrlp_custom_ignore='\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
 
 
-" Black python formatting
+" COC:
+if has("nvim")
+  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+endif
+
+" Treesitter configuration with lua-here:
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "lua", "vim", "help", "query" },
+
+  sync_install = false,
+
+  auto_install = true,
+
+  highlight = {
+    enable = true,
+
+    disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+            return true
+        end
+    end,
+
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+
+
+" [Python] Black python formatting
 let g:black_linelength = 79
 
-" Format on save
+" [Python] Format on save
 augroup black_on_save
 	autocmd!
 	autocmd BufWritePre *.py Black
 augroup end
 "nnoremap <F9> :Black<CR>
+ 
+" [Python, Typescript] LSP Configuration:
+"lua require'lspconfig'.pyright.setup{}
+lua << EOF
+local lspconfig = require('lspconfig')
+lspconfig.pyright.setup{}
+lspconfig.tsserver.setup{}
+EOF
 
+
+"autocmd vimenter * ++nested colorscheme gruvbox
 "GRUVBox theme
 let g:gruvbox_italic=1
-set bg=dark
-"autocmd vimenter * ++nested colorscheme gruvbox
-autocmd vimenter * colorscheme gruvbox
+"let g:gruvbox_contrast_dark="hard"
+autocmd vimenter * colorscheme gruvbox 
+"autocmd vimenter * lua require"bufferline".setup { options = { separator_style = "slant" } }
+"
+" Bufferline:
+let g:airline#extensions#tabline#enabled = 0
+autocmd vimenter * lua require"bufferline".setup { options = { separator_style = "slant" } }
+

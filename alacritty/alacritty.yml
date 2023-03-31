@@ -1,0 +1,9 @@
+env:
+  TERM: xterm-256color
+window:
+  decorations: "none"
+  
+font:
+  normal:
+    family: agave Nerd Font Mono 
+  size: 11.0
