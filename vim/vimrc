@@ -1,7 +1,5 @@
 " This configuration are shared between nvim and vim
 "
-"
-"
 if has('vim_starting')
   set nocompatible               
 endif
@@ -19,7 +17,7 @@ set bg=dark
 " CURSOR:
 set guicursor=a:hor30-Cursor/lCursor
 set ts=2
-set softtabstop=2
+set softtabstop=0
 " number of space chars
 set shiftwidth=2
 " convert tab to spaces
@@ -89,9 +87,41 @@ if has("nvim")
 "  Bufferline
   Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
   Plug 'neovim/nvim-lspconfig'
+" Telescope ( also install ripgrep,fd)
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 	call plug#end()
 endif
 
+" The length of time Vim waits after you stop typing before it triggers the plugin
+" Default is 4000ms
+set updatetime=400
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" COC configuration
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 let g:airline_powerline_fonts = 1
 
@@ -172,18 +202,45 @@ let g:ale_linters = {'clojure':['clj-kondo'], 'python': ['pylint']}
 let g:ale_python_executable='python3'
 
 " FZF:
-nnoremap <C-p> :FZF<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split', 
-  \ 'ctrl-s': 'split', 
-  \ 'ctrl-v': 'vsplit'
-  \}
+"nnoremap <C-p> :FZF<CR>
+" let g:fzf_action = {
+"   \ 'ctrl-t': 'tab split', 
+"   \ 'ctrl-s': 'split', 
+"   \ 'ctrl-v': 'vsplit'
+"   \}
 
+" FUZZY FIND
 " CTRLP:
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,node_modules
-let g:ctrlp_show_hidden=1
-let g:ctrlp_custom_ignore='\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+"set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,node_modules
+"let g:ctrlp_show_hidden=1
+" let g:ctrlp_custom_ignore='\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
 
+" Telescope ==================================================================
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+noremap <C-f> <cmd>Telescope live_grep<cr>
+"nnoremap <C-f> <cmd>Telescope buffers<cr>
+"nnoremap <C-f> <cmd>Telescope help_tags<cr>
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = { -- Insert mode mappings
+        ["<C-k>"] = require('telescope.actions').move_selection_previous,
+        ["<C-j>"] = require('telescope.actions').move_selection_next,
+      }
+    },
+    file_ignore_patterns = {
+      ".git","node_modules","__pycache__", ".svn",".hg",".tox",".ico",".png"
+    }
+  },
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  }
+}
+EOF
+" Telescope setup end ========================================================
 
 " COC:
 if has("nvim")
@@ -231,8 +288,23 @@ augroup end
 "lua require'lspconfig'.pyright.setup{}
 lua << EOF
 local lspconfig = require('lspconfig')
+local util = require "lspconfig/util"
 lspconfig.pyright.setup{}
 lspconfig.tsserver.setup{}
+
+lspconfig.gopls.setup {
+  cmd = {"gopls", "serve"},
+  filetypes = {"go", "gomod"},
+  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+    },
+  },
+}
 EOF
 
 
