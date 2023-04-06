@@ -4,6 +4,7 @@ if has('vim_starting')
   set nocompatible               
 endif
 
+" if has("nvim") ...
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -61,6 +62,10 @@ set fileformats=unix,dos,mac
 set showcmd
 set shell=/bin/zsh
 
+
+" [ PLUGINS ]
+" ===========================================================================
+
 " VimPlug
 
 " Check if vim plug exists
@@ -73,14 +78,22 @@ if !filereadable(vimplug_exists)
   autocmd VimEnter * PlugInstall
 endif
 
-
 if has("nvim")
 	call plug#begin()
-	Plug 'Mofiqul/dracula.nvim'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " nerd tree
+  Plug 'nvim-tree/nvim-tree.lua'
+  " nvim-cmp
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  " snippet engine 
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'saadparwaiz1/cmp_luasnip'
   " typescript support
-  Plug 'leafgarland/typescript-vim'
-  Plug 'peitalin/vim-jsx-typescript'
+  "Plug 'leafgarland/typescript-vim'
+  "Plug 'peitalin/vim-jsx-typescript'
   " treesitter extended highlighting
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "  Plug 'lewis6991/gitsigns.nvim'
@@ -91,8 +104,16 @@ if has("nvim")
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+  Plug 'folke/trouble.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
+"null-ls formatting
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+" Markdown preview
+"  Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install', 'for': ['markdown', 'vim-plug']}
 	call plug#end()
 endif
+
+" ===========================================================================
 
 " The length of time Vim waits after you stop typing before it triggers the plugin
 " Default is 4000ms
@@ -102,25 +123,62 @@ set updatetime=400
 " diagnostics appear/become resolved
 set signcolumn=yes
 
-" COC configuration
-" use <tab> to trigger completion and navigate to the next complete item
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
-inoremap <silent><expr> <Tab>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
-" Use <c-space> to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+" directly copy to clipboard if feature exists
+if has("clipboard")
+	noremap y "+y
+endif
+
+" KEYBINDINGS
+" ===========
+
+" nnoremap <C-w>h Go left tab
+" nnoremap <C-w>l Go right tab
+" nnoremap <C-w>j Go up tab
+" nnoremap <C-w>k Go down tab
+" nnoremap <C-w>s split vertial
+" nnoremap <C-w>v split horizontal 
+" nnoremap <C-w>H move the current window far left
+" nnoremap <C-w>L move the current window far	right 
+" nnoremap <C-w>J move the current window very top 
+" nnoremap <C-w>K move the current window very bottom 
+
+
+
+" [ INTEGRATED TERMINAL ] 
+" ===========================================================================
+if has("nvim")
+  tnoremap <Esc> <C-\><C-n>
+  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  function! OpenTerminal()
+    split term://zsh
+    resize 15
+  endfunction
+  nnoremap <c-n> :call OpenTerminal()<CR>
+endif
+" ===========================================================================
+
+" [ APPERANCE & SYNTAX HIGHLIGHTING & THEMES ]
+" ==========================================================================
+
+
+if has("nvim")
+" NVIM Tree 
+lua << EOF
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+
+-- empty setup using defaults
+  require("nvim-tree").setup()
+EOF
+  nnoremap <C-b> :NvimTreeToggle<CR>
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+" NERDTree:
+  let NERDTreeShowHidden=1
+  let g:NERDTreeIgnore=['node_modules', '__pycache__']
+  let g:NERDTreeMinimalUI = 1
+  nnoremap <C-b> :NERDTreeToggle<CR>
 endif
 
 let g:airline_powerline_fonts = 1
@@ -155,133 +213,108 @@ let g:airline_symbols.linenr = ''
 " vim-fugitive git branch
 let g:airline#extensions#branch#enabled=1
 
-" directly copy to clipboard if feature exists
-if has("clipboard")
-	noremap y "+y
-endif
-
-" KEYBINDINGS
-" ===========
-
-" nnoremap <C-w>h Go left tab
-" nnoremap <C-w>l Go right tab
-" nnoremap <C-w>j Go up tab
-" nnoremap <C-w>k Go down tab
-" nnoremap <C-w>s split vertial
-" nnoremap <C-w>v split horizontal 
-" nnoremap <C-w>H move the current window far left
-" nnoremap <C-w>L move the current window far	right 
-" nnoremap <C-w>J move the current window very top 
-" nnoremap <C-w>K move the current window very bottom 
-
-" Ignores
-
-" NERDTree:
-let NERDTreeShowHidden=1
-let g:NERDTreeIgnore=['node_modules', '__pycache__']
-let g:NERDTreeMinimalUI = 1
-nnoremap <C-b> :NERDTreeToggle<CR>
-
-" INTEGRATED TERMINAL: (NEOVIM)
 if has("nvim")
-  tnoremap <Esc> <C-\><C-n>
-  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-  function! OpenTerminal()
-    split term://zsh
-    resize 15
-  endfunction
-  nnoremap <c-n> :call OpenTerminal()<CR>
+" Custom syntax highlighting with treesitter configuration with lua-here:
+  lua << EOF
+    require'nvim-treesitter.configs'.setup {
+      ensure_installed = { "c", "lua", "vim", "help", "query" },
+      sync_install = false,
+      auto_install = true,
+
+      highlight = {
+        enable = true,
+
+        disable = function(lang, buf)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then
+              return true
+          end
+        end,
+        additional_vim_regex_highlighting = false,
+      },
+    }
+EOF
 endif
 
+" Diagnostic icons 
+"
+if has("nvim")
 
-" ALE LINTER:
-let g:ale_linters = {'clojure':['clj-kondo']}
-let g:ale_fixers = {}
-let g:ale_fixers.python = ['black']
-let g:ale_linters = {'clojure':['clj-kondo'], 'python': ['pylint']}
-let g:ale_python_executable='python3'
+  lua << EOF
+    local signs = {
+      Error = " ",
+      Warn = " ",
+      Hint = " ",
+      Info = " "
+    }
 
+    for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+    end
+EOF
+endif
+
+" ===========================================================================
+
+
+" ===========================================================================
+"
+" [ FUZZY TOOLS ]
+" ===========================================================================
+
+if has("nvim")
+" Telescope 
+  nnoremap <C-p> <cmd>Telescope find_files<cr>
+  noremap <C-f> <cmd>Telescope live_grep<cr>
+  "nnoremap <C-f> <cmd>Telescope buffers<cr>
+  "nnoremap <C-f> <cmd>Telescope help_tags<cr>
+  lua << EOF
+    require('telescope').setup{
+      defaults = {
+        mappings = {
+          i = { -- Insert mode mappings
+              ["<C-k>"] = require('telescope.actions').move_selection_previous,
+              ["<C-j>"] = require('telescope.actions').move_selection_next,
+          }
+        },
+        file_ignore_patterns = {
+          ".git","node_modules","__pycache__", ".svn",".hg",".tox",".ico",".png"
+        }
+      },
+      pickers = {
+      find_files = {
+        hidden = true
+      }
+    }
+  }
+EOF
+else
 " FZF:
-"nnoremap <C-p> :FZF<CR>
-" let g:fzf_action = {
-"   \ 'ctrl-t': 'tab split', 
-"   \ 'ctrl-s': 'split', 
-"   \ 'ctrl-v': 'vsplit'
-"   \}
+  nnoremap <C-p> :FZF<CR>
+  let g:fzf_action = {
+    \ 'ctrl-t': 'tab split', 
+    \ 'ctrl-s': 'split', 
+    \ 'ctrl-v': 'vsplit'
+   \}
 
 " FUZZY FIND
 " CTRLP:
-"set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,node_modules
-"let g:ctrlp_show_hidden=1
-" let g:ctrlp_custom_ignore='\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-
-" Telescope ==================================================================
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-noremap <C-f> <cmd>Telescope live_grep<cr>
-"nnoremap <C-f> <cmd>Telescope buffers<cr>
-"nnoremap <C-f> <cmd>Telescope help_tags<cr>
-lua << EOF
-require('telescope').setup{
-  defaults = {
-    mappings = {
-      i = { -- Insert mode mappings
-        ["<C-k>"] = require('telescope.actions').move_selection_previous,
-        ["<C-j>"] = require('telescope.actions').move_selection_next,
-      }
-    },
-    file_ignore_patterns = {
-      ".git","node_modules","__pycache__", ".svn",".hg",".tox",".ico",".png"
-    }
-  },
-  pickers = {
-    find_files = {
-      hidden = true
-    }
-  }
-}
-EOF
-" Telescope setup end ========================================================
-
-" COC:
-if has("nvim")
-  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+  set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,node_modules
+  let g:ctrlp_show_hidden=1
+  let g:ctrlp_custom_ignore='\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
 endif
+" ===========================================================================
 
-" Treesitter configuration with lua-here:
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "vim", "help", "query" },
-
-  sync_install = false,
-
-  auto_install = true,
-
-  highlight = {
-    enable = true,
-
-    disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
-
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
+" [ DEV ENVIRONMENT SETUPS ]
+" ===========================================================================
 
 
 
-" [Python] Black python formatting
-let g:black_linelength = 79
+" [ LINTING ]
+" ===========================================================================
 
-" [Python] Format on save
-augroup black_on_save
-	autocmd!
-	autocmd BufWritePre *.py Black
-augroup end
 "nnoremap <F9> :Black<CR>
  
 " [Python, Typescript] LSP Configuration:
@@ -307,6 +340,127 @@ lspconfig.gopls.setup {
 }
 EOF
 
+" [ CODE COMPLETION ]
+" ===========================================================================
+" COC configuration
+" use <tab> to trigger completion and navigate to the next complete item
+
+" if has("nvim")
+"   let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+" endif
+
+" function! CheckBackspace() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" inoremap <silent><expr> <Tab>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+" inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+" " Use <c-space> to trigger completion
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
+
+" NVIM-CMP
+lua <<EOF
+  -- Set up nvim-cmp.
+  local cmp = require'cmp'
+  local luasnip = require("luasnip")
+  
+  luasnip.setup{}
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<Tab>'] = cmp.mapping(function(fallback)
+         if cmp.visible() then
+           cmp.select_next_item()
+         elseif luasnip.expand_or_jumpable() then
+           luasnip.expand_or_jump()
+         else
+           fallback()
+         end
+      end, { 'i', 's' }),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+       end, { 'i', 's' }),
+      }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Set up lspconfig.
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['pyright'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['gopls'].setup {
+    capabilities = capabilities
+  }
+EOF
+
+
 
 "autocmd vimenter * ++nested colorscheme gruvbox
 "GRUVBox theme
@@ -314,8 +468,67 @@ let g:gruvbox_italic=1
 "let g:gruvbox_contrast_dark="hard"
 autocmd vimenter * colorscheme gruvbox 
 "autocmd vimenter * lua require"bufferline".setup { options = { separator_style = "slant" } }
-"
+
 " Bufferline:
 let g:airline#extensions#tabline#enabled = 0
 autocmd vimenter * lua require"bufferline".setup { options = { separator_style = "slant" } }
 
+" [ FORMATTING ]
+" ===========================================================================
+if has("nvim")
+" null-ls setup
+lua << EOF
+  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+  null_ls = require("null-ls")
+  null_ls.setup({
+    sources = {
+        -- Python setup.
+        null_ls.builtins.formatting.black, -- use black as formatter
+        null_ls.builtins.diagnostics.pylint, -- pylint as dianostics
+        null_ls.builtins.code_actions.eslint,
+        -- Go setup
+        null_ls.builtins.formatting.goimports, -- use goimports for formatting
+        null_ls.builtins.diagnostics.golangci_lint -- diagnostics
+    },
+    -- you can reuse a shared lspconfig on_attach callback here
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                    vim.lsp.buf.format({bufnr = bufnr})
+                end,
+            })
+        end
+    end,
+})
+EOF
+else
+  " [Python] Black format on save 
+  augroup black_on_save
+    autocmd!
+	  autocmd BufWritePre *.py Black
+  augroup end
+  " [Python] Black python formatting
+  let g:black_linelength = 79
+endif
+
+" ===========================================================================
+
+
+" [ LINTING ]
+" ===========================================================================
+
+"if has("nvim")
+" ALE LINTER:
+"let g:ale_linters = {'clojure':['clj-kondo']}
+" let g:ale_fixers = {}
+" let g:ale_fixers.python = ['black']
+" let g:ale_linters = {'clojure':['clj-kondo'], 'python': ['pylint']}
+" let g:ale_python_executable='python3'
+
+
+" ===========================================================================
