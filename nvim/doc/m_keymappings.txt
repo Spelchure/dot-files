@@ -1,14 +1,91 @@
 ===============================================================================
 KEYMAPPINGS                                                      *m.key-mappings*
 
-:Ack[!] {pattern}                                                       *:Ack*
 
+`Leader` key is `space`
 
-+----------------------------------------------------------+
-| KEYMAP                    | PURPOSE                      | 
-| ------------------------- | ---------------------------- |
-| Ctrl-T~                   | Opens terminal in new tab    |
-+----------------------------------------------------------+
+NORMAL MODE
+-------------------------------------------------------------------------------
+
++--------------------------------------------------------+
+| KEY                     | PURPOSE                      | 
+| ----------------------- | ---------------------------- |
+| `Ctrl-T`                  | Opens terminal in new tab    |
+| `Ctrl-H`                  | Split window  go left        |
+| `Ctrl-L`                  | Split window go right        |
+| `Ctrl-J`                  | Split window go down         |
+| `Ctrl-K`                  | Split window go up           |
+| `Leader-c`                | Close file explorer          |
+| `Leader-fe`               | Focus or open file explorer  |
+| `Ctrl-Up,Down,Left,Right` | Resize splits                |
+| `Shift-K`                 | Navigate next buffer         |
+| `Shift-J`                 | Navigate previous buffer     |
+| `Alt-j`                   | Move text down               |
+| `Alt-k`                   | Move text down               |
+| `Leader-n`                | Shows TODOS,FIXES,NOTES etc  |
++--------------------------------------------------------+
 >
+FUZZY FINDING                                         *m.key-mappings.fuzzyfind*
+-------------------------------------------------------------------------------
++--------------------------------------------------------+
+| KEY                     | PURPOSE                      | 
+| ----------------------- | ---------------------------- |
+| `Leader-fs`               | Open file                    |
+| `Leader-ft`               | Live grep in all files       |
++--------------------------------------------------------+
+
+
+DEBUGGING                                                 *m.key-mappings.debug*
+-------------------------------------------------------------------------------
+
++--------------------------------------------------------+
+| KEY                     | PURPOSE                      | 
+| ----------------------- | ---------------------------- |
+| `Leader-db`               | Define breakpoint            |
+| `Leader-dc`               | Continue                     |
+| `Leader-di`               | Step into                    |
+| `Leader-do`               | Setp over                    |
+| `Leader-dO`               | Step out                     |
+| `Leader-dr`               | Toggle REPL window           |
+| `Leader-dl`               | Runs last debugging sessions |
+| `Leader-du`               | Opens debugging ui           |
+| `Leader-dt`               | Terminate debugging session  |
++--------------------------------------------------------+
+
+
+LSP                                                         *m.key-mappings.lsp*
+-------------------------------------------------------------------------------
+
++--------------------------------------------------------+
+| KEY                     | PURPOSE                      | 
+| ----------------------- | ---------------------------- |
+| `Leader-ff`               | Format code                  |
+| `Leader-gf`               | Goto declaration             |
+| `Leader-K`                | Hover; show func signature   |
+| `Leader-gd`               | Goto definition              |
+| `Leader-gi`               | Show implementation          |
+| `Leader-gr`               | Show references              |
+| `Leader-gh`               | Show help,diagnostic on line |
+| `Leader-li`               | Show LSPInfo                 |
+| `Leader-lI`               | Show Mason; LSPs, DAPs etc.  |
+| `Leader-la`               | Execute code action          |
+| `Leader-lj`               | Diagnostic goto previous     |
+| `Leader-lk`               | Diagnostic goto next         |
+| `Leader-lr`               | Rename LSP buf               |
+| `Leader-ls`               | Get help about symbol        |
+| `Leader-lq`               | Diagnostic set location list |
+| `Leader-lt`               | Toggle diagnostic window     |
++--------------------------------------------------------+
+
+VISUAL MODE
+-------------------------------------------------------------------------------
+
++--------------------------------------------------------+
+| KEY                     | PURPOSE                      | 
+| ----------------------- | ---------------------------- |
+| `Alt-k`                   | Move line up                 |
+| `Alt-j`                   | Move line down               |
++--------------------------------------------------------+
+
 
  vim:tw=78:ts=8:ft=help:

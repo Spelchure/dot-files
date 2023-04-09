@@ -1,1 +1,4 @@
 m.key-mappings	m_keymappings.txt	/*m.key-mappings*
+m.key-mappings.debug	m_keymappings.txt	/*m.key-mappings.debug*
+m.key-mappings.fuzzyfind	m_keymappings.txt	/*m.key-mappings.fuzzyfind*
+m.key-mappings.lsp	m_keymappings.txt	/*m.key-mappings.lsp*

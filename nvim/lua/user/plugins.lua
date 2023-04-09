@@ -70,6 +70,7 @@ return packer.startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
   use "hrsh7th/cmp-nvim-lua"
+  use "hrsh7th/cmp-nvim-lsp-signature-help" -- show signature when calling fn.
   -- snippet engine
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
@@ -79,6 +80,12 @@ return packer.startup(function(use)
   use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
   use 'jose-elias-alvarez/null-ls.nvim' -- LSP diagnostics and code actions also supports flake8, prettier, eslint
   use "RRethy/vim-illuminate" -- illuminate hovered keyword
+  
+  use "folke/trouble.nvim" -- LSP messages UI
+
+  -- DAP
+  use 'mfussenegger/nvim-dap'
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   -- Telescope, Fuzzy finding
   use "nvim-telescope/telescope.nvim"
