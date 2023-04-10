@@ -27,6 +27,9 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Disable highlight
+keymap("n", "<C-n>", ":nohlsearch<CR>", opts)
+
 -- Should go zen mode
 keymap("n", "<leader>c", ":NvimTreeClose<CR>", opts)
 

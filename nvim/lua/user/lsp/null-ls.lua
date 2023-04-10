@@ -22,6 +22,7 @@ null_ls.setup {
     formatting.black,
     formatting.stylua,
     diagnostics.pylint,
+    diagnostics.mypy,
     -- Javascript/Typescript
     code_actions.eslint,
     -- Golang
