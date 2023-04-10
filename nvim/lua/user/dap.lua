@@ -60,8 +60,7 @@ dapui.setup {
     },
     {
       elements = {
-        { id = "repl", size = 0.45 },
-        { id = "console", size = 0.55 },
+        { id = "repl", size = 0.99 },
       },
       size = 0.27,
       position = "bottom",
