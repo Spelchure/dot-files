@@ -19,9 +19,10 @@ dap.defaults.fallback.force_external_terminal = true
 
 -- Python
 -- Use conda python if active
-local python_executable = os.getenv("CONDA_PYTHON_EXE")
-if (python_executable == nil or python_executable == '') then
-  python_executable = "/usr/bin/python"
+local python_executable = "/usr/bin/python" 
+local conda_prefix = os.getenv("CONDA_PREFIX")
+if (conda_prefix ~= nil and conda_prefix ~= '') then
+  python_executable = conda_prefix .. "/bin/python"
 end
 
 dap.adapters.python = {
