@@ -5,11 +5,6 @@ end
 
 local actions = require "telescope.actions"
 
--- remove preview in find files
-require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{
-  previewer = false
-})
-
 telescope.setup {
   defaults = {
 
