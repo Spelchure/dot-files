@@ -31,7 +31,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<C-n>", ":nohlsearch<CR>", opts)
 
 -- Should go zen mode
-keymap("n", "<leader>c", ":NvimTreeClose<CR>", opts)
+keymap("n", "<leader>fc", ":NvimTreeClose<CR>", opts)
 
 keymap("n",".", "<Nop>", opts)
 
