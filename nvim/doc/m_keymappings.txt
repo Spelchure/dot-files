@@ -32,6 +32,7 @@ FUZZY FINDING                                         *m.key-mappings.fuzzyfind*
 | ----------------------- | ---------------------------- |
 | `Leader-fs`               | Open file                    |
 | `Leader-ft`               | Live grep in all files       |
+| `Leader-fr`               | Resume to search(livegrep)   |
 +--------------------------------------------------------+
 
 
