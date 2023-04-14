@@ -16,6 +16,7 @@ null_ls.setup {
   debug = false,
   sources = {
     formatting.prettier.with {
+
       extra_filetypes = { "toml" },
     },
     -- Python
@@ -30,6 +31,9 @@ null_ls.setup {
     diagnostics.golangci_lint,
     -- Java
     formatting.google_java_format,
+    -- Yaml
+    diagnostics.yamllint,
+    --formatting.yamlfmt, -- Not compatible some linting issues 
   },
   -- format on save
   on_attach = function(client, bufnr)
