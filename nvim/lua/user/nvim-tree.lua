@@ -17,6 +17,9 @@ local function on_attach(bufnr)
   api.config.mappings.default_on_attach(bufnr)
   vim.keymap.del('n', '<C-t>', { buffer = bufnr })
   --vim.keymap.set('n', 't', api.node.open.tab, opts('Open: New Tab'))
+  -- Remove filtering:
+  vim.keymap.del('n', 'f', {buffer = bufnr});
+  -- vim.keymap.set('n', '<C-f>', { buffer = bufnr });
 end
 
 nvim_tree.setup {
