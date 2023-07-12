@@ -84,6 +84,7 @@ plugins=(
   git
   bundler 
   dotenv
+  kubectl
   fzf 
 	poetry
   colorize
