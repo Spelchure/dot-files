@@ -34,6 +34,8 @@ null_ls.setup {
     -- Yaml
     diagnostics.yamllint,
     --formatting.yamlfmt, -- Not compatible some linting issues 
+    diagnostics.cmake_lint,
+    formatting.cmake_format
   },
   -- format on save
   on_attach = function(client, bufnr)

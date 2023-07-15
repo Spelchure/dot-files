@@ -8,7 +8,8 @@ local servers = {
 	"jsonls",
 	"yamlls",
   "gopls",
-  "tailwindcss"
+  "tailwindcss",
+  "cmake",
 }
 
 local settings = {
