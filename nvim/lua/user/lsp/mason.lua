@@ -10,7 +10,11 @@ local servers = {
   "gopls",
   "tailwindcss",
   "cmake",
+  "clangd",
 }
+-- See for availablabe servers:
+-- https://github.com/williamboman/mason-lspconfig.nvim
+
 
 local settings = {
 	ui = {
