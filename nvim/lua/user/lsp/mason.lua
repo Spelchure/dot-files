@@ -11,6 +11,7 @@ local servers = {
   "tailwindcss",
   "cmake",
   "clangd",
+  "csharp_ls"
 }
 -- See for availablabe servers:
 -- https://github.com/williamboman/mason-lspconfig.nvim

@@ -38,6 +38,8 @@ null_ls.setup {
     formatting.cmake_format,
     formatting.clang_format,
     diagnostics.cppcheck,
+    -- C#,
+    formatting.csharpier,
   },
   -- format on save
   on_attach = function(client, bufnr)
