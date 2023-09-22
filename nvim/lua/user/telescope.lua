@@ -12,7 +12,7 @@ telescope.setup {
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-    file_ignore_patterns = { ".git/", "node_modules", "__pycache__", ".svn", ".hg", ".tox" },
+    file_ignore_patterns = { ".git/", "node_modules", "__pycache__", ".svn", ".hg", ".tox", ".png", ".jpg" },
 
     mappings = {
       i = {
