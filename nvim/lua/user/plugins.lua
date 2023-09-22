@@ -100,6 +100,9 @@ return packer.startup(function(use)
   -- Integrated Terminal
   use {"akinsho/toggleterm.nvim", tag = '*' }
 
+  -- For previewing markdown in browser 
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
