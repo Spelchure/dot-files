@@ -51,6 +51,25 @@ M.setup = function()
 	})
 end
 
+local function get_current_linenum()
+  return vim.api.nvim__buf_stats(0).current_lnum - 1 -- Start from the zero
+end
+
+local function is_there_any_diagnostics()
+  local diag_table = vim.diagnostic.get(0, { lnum = get_current_linenum() })
+  return not (next(diag_table) == nil)
+end
+
+local function line_diagnostic()
+  if is_there_any_diagnostics() then
+    vim.diagnostic.open_float()
+  else
+    -- If there is no error/diagnostic in line 
+    -- hover to the line
+    vim.lsp.buf.hover()
+  end
+end
+
 -- lsp keymaps
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
@@ -58,10 +77,11 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "<leader>ff", "<cmd>lua vim.lsp.buf.format()<CR>",opts)
 	keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	--keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 	keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	keymap(bufnr, "n", "gh", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+
+  vim.keymap.set('n', 'gh', line_diagnostic, { buffer = bufnr })
+
 	keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
 	keymap(bufnr, "n", "<leader>lI", "<cmd>Mason<cr>", opts)
 	keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
