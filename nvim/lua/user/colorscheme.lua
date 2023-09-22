@@ -1,6 +1,6 @@
 
-THEME = "tokyonight" 
---THEME = "gruvbox-material" -- uncomment for gruvbox 
+THEME = "tokyonight"
+--THEME = "gruvbox-baby" -- uncomment for gruvbox 
 
 
 if THEME == "gruvbox-material" then
