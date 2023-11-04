@@ -1,0 +1,32 @@
+let mapleader=" "
+
+map gh <Action>(ShowErrorDescription)
+map gu <Action>(QuickJavaDoc)
+
+map gf <Action>(GotoDeclaration)
+map gd <Action>(GotoTypeDeclaration) 
+map gy <Action>(ReSharperGotoImplementation)
+map gb <Action>(Back)
+
+map gc <Action>(CommentByLineComment)
+
+map <leader>fe <Action>(ActivateProjectToolWindow)
+map <leader>ff <Action>(ReformatCode)
+map <leader>fs <Action>(SearchEverywhere)
+map <leader>fc <Action>(ToggleZenMode)
+
+map <D-j> <Action>(NextSplitter)
+map <D-k> <Action>(PrevSplitter)
+map <D-h> <Action>(NextSplitter)
+map <D-l> <Action>(PrevSplitter)
+
+
+map <D-w>s <Action>(SplitHorizontally)
+map <D-w>v <Action>(SplitVertically)
+
+
+map <A-k> <Action>(MoveLineUp)
+map <A-j> <Action>(MoveLineDown)
+
+set ideajoin
+set NERDTree
