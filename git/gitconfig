@@ -1,31 +1,30 @@
 [user]
 	email = <email> 
-	name = <name>
-	signingKey = <key_to_sign> 
+	name =  <name>
 [core]
-	editor = nvim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	editor = vim
+	pager = delta 
 [color]
     ui = auto
-[diff]
-    tool = nvimdiff 
 [difftool "vscode"]
     cmd = code -n --wait --diff $LOCAL $REMOTE
 [difftool "nvimdiff"]
 	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 	prompt = false
 [alias]
+	p = push
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	st = status
-	df = difftool
-  bn = "!git rev-parse --abbrev-ref HEAD"
-  pmr = "!pmr() { if [ -z \"$1\" ]; then echo \"Please supply target branch\";  exit 1; fi; git push -o merge_request.create -o merge_request.target=\"$1\" -o merge_request.remove_source_branch origin $(git bn); }; pmr"
+	df = diff 
+  	bn = "!git rev-parse --abbrev-ref HEAD"
+  	pmr = "!pmr() { if [ -z \"$1\" ]; then echo \"Please supply target branch\";  exit 1; fi; git push -o merge_request.create -o merge_request.target=\"$1\" -o merge_request.remove_source_branch origin $(git bn); }; pmr"
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [mergetool "vimdiff"]
 	prompt = false
-  cmd = "nvim  -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
-
-[commit]
-	gpgsign = true
+  	cmd = "nvim  -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
